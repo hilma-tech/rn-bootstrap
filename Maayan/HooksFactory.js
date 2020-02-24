@@ -1,7 +1,7 @@
 'use strict';
 
 import HooksRepository from './HooksRepository'
-import loadable from '@loadable/component';
+//import loadable from '@loadable/component';
 // import HooksList from "./HooksList"
 export default class HooksFactory {
     hooksRepository = null;
