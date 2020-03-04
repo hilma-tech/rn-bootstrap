@@ -1,0 +1,10 @@
+# to add route we have AppNavigator.js and AppNavigator.web.js
+
+# we can add to the switchNavigator object two things =>
+    => key-     for the route name
+    => value -  for the component name
+
+# to switch between routes by button -
+    => define in the render the 'navigate'
+       const { navigate } = this.props.navigation;
+    => onPress = {() => navigate('Reg')}
