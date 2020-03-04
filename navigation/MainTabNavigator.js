@@ -5,11 +5,11 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
 // import HomeScreen from '../screens/HomeScreen';
-import HomeScreen from "./../Maayan/HomeScreen"
+import HomeScreen from "./../Noga/HomeScreen"
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import consts from "./../src/modules/tools/client/components/hooks/consts"
-import hooksFactory from "./../src/modules/tools/client/components/hooks/HooksFactory"
+import consts from "./../src/modules/tools/client/hooks/consts"
+import hooksFactory from "./../src/modules/tools/client/hooks/HooksFactory"
 console.log("hii from APP")
 let hooksRepository = hooksFactory.getRepository();
 hooksRepository.addHook(consts.AUTH,consts.HOOK__AFTER_LOGIN,()=>{console.log("hii from main tab")});
