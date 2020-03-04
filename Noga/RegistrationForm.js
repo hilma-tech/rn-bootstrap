@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 
 import { AsyncStorage } from 'react-native';
-import HooksFactory from '../Maayan/HooksFactory';
+import hooksFactory from '../src/modules/tools/client/components/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
 
 export default class RegistrationForm extends Component {
@@ -23,9 +23,8 @@ export default class RegistrationForm extends Component {
       email: 'imspongebob@gmail.com',
       password: 'spongeBob1234',
     }
-    window.HooksFactory = new HooksFactory();
-    window.hooksRepository = window.HooksFactory.getRepository();
-    window.hooksRepository.addHook("auth", "AFTER_REGISTER", this.setUserDataInASyncStorage);
+    this.hooksRepository = hooksFactory.getRepository();
+    this.hooksRepository.addHook("auth", "AFTER_REGISTER", this.setUserDataInASyncStorage);
 
     // this.hooksRepository = hooksFactory.getRepository();
     // hooksRepository.addHook("auth", "AFTER_REGISTER", this.setUserDataInASyncStorage);
@@ -60,7 +59,7 @@ export default class RegistrationForm extends Component {
       console.log("login res?", res);
       console.log("document.cookie?", document.cookie);
       // verboseAsyncStorage();
-      window.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
+      this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
     }
     if (err) console.log("login err?", err);
   }
