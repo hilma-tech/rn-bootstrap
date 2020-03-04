@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
 
-import HooksFactory from "../Maayan/HooksFactory"
+import hooksFactory from "../src/modules/tools/client/components/hooks/HooksFactory"
 import Auth from "./../src/modules/auth/Auth"
 
 // function getCookieByKey(name) { // mv to tools/cookeis  getcookieByKey
@@ -46,14 +46,12 @@ function superFetch(url, payload) {
 export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
-
-    window.HooksFactory = new HooksFactory();
-    window.hooksRepository = window.HooksFactory.getRepository();
-    window.hooksRepository.addHook("auth", "AFTER_LOGIN", () => { console.log("hii from home screen") });
     this.state = {
       username: 'admin@carmel6000.amitnet.org',
       password: 'E2PSzAmJ-5-ldKnl',
     };
+    this.hooksRepository = hooksFactory.getRepository();
+    this.hooksRepository.addHook("auth", "AFTER_LOGIN", () => { console.log("hii from home screen") });
   }
 
   async showUsersList() {
