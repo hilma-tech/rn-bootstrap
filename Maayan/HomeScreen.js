@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
-
-import HooksFactory from "./HooksFactory"
+import consts from "../src/modules/tools/client/components/hooks/consts"
+import hooksFactory from "./../src/modules/tools/client/components/hooks/HooksFactory"
 import Auth from "./../src/modules/auth/Auth"
 function getCookieByKey(name) { // mv to tools/cookeis  getcookieByKey
   var value = "; " + document.cookie;
@@ -46,9 +46,9 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
 
-    window.HooksFactory = new HooksFactory();
-    window.hooksRepository = window.HooksFactory.getRepository();
-    window.hooksRepository.addHook("auth","AFTER_LOGIN",()=>{console.log("hii from home screen")});
+    // window.HooksFactory = new HooksFactory();
+    let hooksRepository = hooksFactory.getRepository();
+    hooksRepository.addHook(consts.AUTH,consts.HOOK__AFTER_LOGIN, () => { console.log("hii from home screen") });
     this.state = {
       username: 'admin@carmel6000.amitnet.org',
       password: 'E2PSzAmJ-5-ldKnl',
