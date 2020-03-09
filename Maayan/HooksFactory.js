@@ -1,6 +1,6 @@
 'use strict';
 
-import HooksRepository from './../src/modules/tools/client/hooks/HooksRepository'
+import HooksRepository from './../src/modules/tools/client/components/hooks/HooksRepository'
 //import loadable from '@loadable/component';
 // import HooksList from "./HooksList"
 export default class HooksFactory {

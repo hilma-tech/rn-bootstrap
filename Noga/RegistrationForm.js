@@ -12,8 +12,9 @@ import {
 } from 'react-native';
 
 import { AsyncStorage } from 'react-native';
-import hooksFactory from '../src/modules/tools/client/hooks/HooksFactory';
+import hooksFactory from '../src/modules/tools/client/components/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
+import exampleStore from '../src/stores/example.store';
 
 class RegistrationForm extends Component {
 
@@ -71,40 +72,40 @@ class RegistrationForm extends Component {
   }
 
   render() {
-
+    console.log("ExampleStore", this.props.ExampleStore)
     return (
-        <View style={styles.container}>
-          <View style={styles.inputContainer}>
-            <TextInput style={styles.inputs}
-              placeholder="Full name"
-              keyboardType="email-address"
-              underlineColorAndroid='transparent'
-              value={this.state.fullName}
-              onChangeText={(fullName) => this.setState({ fullName })} />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput style={styles.inputs}
-              placeholder="Email"
-              keyboardType="email-address"
-              underlineColorAndroid='transparent'
-              value={this.state.email}
-              onChangeText={(email) => this.setState({ email })} />
-          </View>
-
-          <View style={styles.inputContainer}>
-            <TextInput style={styles.inputs}
-              placeholder="Password"
-              secureTextEntry={true}
-              underlineColorAndroid='transparent'
-              value={this.state.password}
-              onChangeText={(password) => this.setState({ password })} />
-          </View>
-
-          <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-            <Text style={styles.signUpText}>Sign up</Text>
-          </TouchableHighlight>
+      <View style={styles.container}>
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Full name"
+            keyboardType="email-address"
+            underlineColorAndroid='transparent'
+            value={this.state.fullName}
+            onChangeText={(fullName) => this.setState({ fullName })} />
         </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Email"
+            keyboardType="email-address"
+            underlineColorAndroid='transparent'
+            value={this.state.email}
+            onChangeText={(email) => this.setState({ email })} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <TextInput style={styles.inputs}
+            placeholder="Password"
+            secureTextEntry={true}
+            underlineColorAndroid='transparent'
+            value={this.state.password}
+            onChangeText={(password) => this.setState({ password })} />
+        </View>
+
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+          <Text style={styles.signUpText}>Sign up</Text>
+        </TouchableHighlight>
+      </View>
     );
   }
 }
