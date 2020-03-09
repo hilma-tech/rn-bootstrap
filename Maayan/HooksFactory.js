@@ -23,7 +23,7 @@ export default class HooksFactory {
 
 
             } catch (err) {
-                console.log("err", err)
+                console.log("err from HooksFactory")
             }
 
         })

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { inject, observer } from "mobx-react";
 import {
   StyleSheet,
   Text,
@@ -14,7 +15,7 @@ import { AsyncStorage } from 'react-native';
 import hooksFactory from '../src/modules/tools/client/components/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
 
-export default class RegistrationForm extends Component {
+class RegistrationForm extends Component {
 
   constructor(props) {
     super(props);
@@ -32,10 +33,10 @@ export default class RegistrationForm extends Component {
 
   onClickListener = (viewId) => {
     console.log("Alert", "Button pressed " + viewId);
-    this.onLogin()
+    this.onRegister()
   }
 
-  onLogin = async () => {
+  onRegister = async () => {
     const { fullName, password, email } = this.state;
 
     //Alert.alert('Credentials', `${username} + ${password}`);
@@ -70,43 +71,40 @@ export default class RegistrationForm extends Component {
   }
 
   render() {
-    console.log("egeger")
+
     return (
-      <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          {/* <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/> */}
-          <TextInput style={styles.inputs}
-            placeholder="Full name"
-            keyboardType="email-address"
-            underlineColorAndroid='transparent'
-            value={this.state.fullName}
-            onChangeText={(fullName) => this.setState({ fullName })} />
-        </View>
+        <View style={styles.container}>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.inputs}
+              placeholder="Full name"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              value={this.state.fullName}
+              onChangeText={(fullName) => this.setState({ fullName })} />
+          </View>
 
-        <View style={styles.inputContainer}>
-          {/* <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/> */}
-          <TextInput style={styles.inputs}
-            placeholder="Email"
-            keyboardType="email-address"
-            underlineColorAndroid='transparent'
-            value={this.state.email}
-            onChangeText={(email) => this.setState({ email })} />
-        </View>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.inputs}
+              placeholder="Email"
+              keyboardType="email-address"
+              underlineColorAndroid='transparent'
+              value={this.state.email}
+              onChangeText={(email) => this.setState({ email })} />
+          </View>
 
-        <View style={styles.inputContainer}>
-          {/* <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/> */}
-          <TextInput style={styles.inputs}
-            placeholder="Password"
-            secureTextEntry={true}
-            underlineColorAndroid='transparent'
-            value={this.state.password}
-            onChangeText={(password) => this.setState({ password })} />
-        </View>
+          <View style={styles.inputContainer}>
+            <TextInput style={styles.inputs}
+              placeholder="Password"
+              secureTextEntry={true}
+              underlineColorAndroid='transparent'
+              value={this.state.password}
+              onChangeText={(password) => this.setState({ password })} />
+          </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
-          <Text style={styles.signUpText}>Sign up</Text>
-        </TouchableHighlight>
-      </View>
+          <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+            <Text style={styles.signUpText}>Sign up</Text>
+          </TouchableHighlight>
+        </View>
     );
   }
 }
@@ -158,3 +156,4 @@ const styles = StyleSheet.create({
   }
 });
 
+export default inject("ExampleStore")(observer(RegistrationForm));
