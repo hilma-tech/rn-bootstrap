@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 import { AsyncStorage } from 'react-native';
-import hooksFactory from '../src/modules/tools/client/components/hooks/HooksFactory';
+import hooksFactory from '../src/modules/tools/client/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
 
 class RegistrationForm extends Component {

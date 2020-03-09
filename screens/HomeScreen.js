@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 import {AsyncStorage} from 'react-native';
 
-
+import Auth from "./../src/modules/auth/Auth"
 function getCookieByKey(name) { // mv to tools/cookeis  getcookieByKey
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
@@ -79,12 +79,13 @@ export default class HomeScreen extends Component {
 
     let res=null;
     try{
-      res = await fetch('https://pumba.carmel6000.com/api/CustomUsers/elogin/', {
-        method: 'POST', 
-        credentials: 'same-origin',
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: username, password: password })
-      }).then(res=>res.json());
+      res = await Auth.login();
+      // res = await fetch('https://pumba.carmel6000.com/api/CustomUsers/elogin/', {
+      //   method: 'POST', 
+      //   credentials: 'same-origin',
+      //   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ email: username, password: password })
+      // }).then(res=>res.json());
 
     
 

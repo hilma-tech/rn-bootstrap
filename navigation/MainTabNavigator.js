@@ -4,10 +4,15 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-import HomeScreen from '../Noga/HomeScreen';
+// import HomeScreen from '../screens/HomeScreen';
+import HomeScreen from "./../Noga/HomeScreen"
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-
+import consts from "./../src/modules/tools/client/hooks/consts"
+import hooksFactory from "./../src/modules/tools/client/hooks/HooksFactory"
+console.log("hii from APP")
+let hooksRepository = hooksFactory.getRepository();
+hooksRepository.addHook(consts.AUTH,consts.HOOK__AFTER_LOGIN,()=>{console.log("hii from main tab")});
 const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
