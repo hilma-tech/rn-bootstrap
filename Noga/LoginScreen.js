@@ -37,22 +37,21 @@ export default class HomeScreen extends Component {
 
   async onLogin() {
     const { email, password } = this.state;
-    console.log('Credentials', `${email} + ${password}`);
 
     let emailOutput = ValidateFields.validateEmailInput(email, true)
     let passwordOutput = ValidateFields.validatePasswordInput(password, true);
 
     console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
 
-    if (emailOutput !== '') {
+    if (emailOutput !== this.state.emailOutput) {
       this.setState({ emailOutput });
-      return;
     }
-    if (passwordOutput !== '') {
+    if (passwordOutput !== this.state.passwordOutput) {
       this.setState({ passwordOutput });
-      return;
     }
+    if (passwordOutput !== '' || emailOutput !== '') return;
 
+    console.log('Credentials', `${email} + ${password}`);
     let res = null;
     try {
       res = await Auth.login(email, password, res => res.json());
@@ -79,6 +78,8 @@ export default class HomeScreen extends Component {
 
     return (
       <View style={styles.container}>
+        <Text style={{ fontSize: 25 }}>Sign In</Text>
+
         {/* <TextInput
           value={this.state.email}
           onChangeText={(value) => this.handleChange("email", value)}
@@ -94,9 +95,9 @@ export default class HomeScreen extends Component {
           style={styles.input}
         />
 
-        {this.state.emailOutput ?
-          <Text>{this.state.emailOutput}</Text>
-          : null}
+
+        <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
+
         {/* <TextInput
           value={this.state.password}
           onChangeText={(value) => this.handleChange("password", value)}
@@ -114,10 +115,7 @@ export default class HomeScreen extends Component {
           secureTextEntry={true}
         />
 
-        {this.state.passwordOutput ?
-          <Text>{this.state.passwordOutput}</Text>
-          : null}
-
+        <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.onLogin.bind(this)}>
           <Text style={styles.signUpText}>Login</Text>
@@ -153,7 +151,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
+    // backgroundColor: '#ecf0f1',
   },
   input: {
     // width: 200,
