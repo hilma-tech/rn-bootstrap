@@ -1,0 +1,15 @@
+# safe hooks in auth - check if hooks is exist and than import
+
+# add nav bar - Home, Login, Registeration
+    - Home: 
+        if user is connected (asyncStorage if react native...) : "Hi {name}"
+        if no user : "please <link>login</link>"
+    - Login :
+        email validation - from tools=> validate tools
+        password validation - from tools=> validate tools
+    - Registeration : 
+        add fields with validation 
+        add rnRegister method to auth
+
+# style the pages with colors and floating label as this -
+    https://material-ui.com/getting-started/templates/sign-in/
