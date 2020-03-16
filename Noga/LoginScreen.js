@@ -11,8 +11,8 @@ export default class HomeScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "", //'admin@carmel6000.amitnet.org',
-      password: "",//'E2PSzAmJ-5-ldKnl',
+      email: 'admin@carmel6000.amitnet.org',
+      password: 'E2PSzAmJ-5-ldKnl',
       emailOutput: '',
       passwordOutput: ''
     };
@@ -38,18 +38,18 @@ export default class HomeScreen extends Component {
   async onLogin() {
     const { email, password } = this.state;
 
-    let emailOutput = ValidateFields.validateEmailInput(email, true)
-    let passwordOutput = ValidateFields.validatePasswordInput(password, true);
+    // let emailOutput = ValidateFields.validateEmailInput(email, true)
+    // let passwordOutput = ValidateFields.validatePasswordInput(password, true);
 
-    console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
+    // console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
 
-    if (emailOutput !== this.state.emailOutput) {
-      this.setState({ emailOutput });
-    }
-    if (passwordOutput !== this.state.passwordOutput) {
-      this.setState({ passwordOutput });
-    }
-    if (passwordOutput !== '' || emailOutput !== '') return;
+    // if (emailOutput !== this.state.emailOutput) {
+    //   this.setState({ emailOutput });
+    // }
+    // if (passwordOutput !== this.state.passwordOutput) {
+    //   this.setState({ passwordOutput });
+    // }
+    // if (passwordOutput !== '' || emailOutput !== '') return;
 
     console.log('Credentials', `${email} + ${password}`);
     let res = null;
@@ -96,7 +96,7 @@ export default class HomeScreen extends Component {
         />
 
 
-        <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
+        {/* <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text> */}
 
         {/* <TextInput
           value={this.state.password}
@@ -115,7 +115,7 @@ export default class HomeScreen extends Component {
           secureTextEntry={true}
         />
 
-        <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
+        {/* <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text> */}
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.onLogin.bind(this)}>
           <Text style={styles.signUpText}>Login</Text>

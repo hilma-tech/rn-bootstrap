@@ -7,6 +7,7 @@ import { AsyncStorage } from 'react-native';
 import hooksFactory from '../src/modules/tools/client/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
 import exampleStore from '../src/stores/example.store';
+import ValidateFields from '../src/modules/tools/ValidateFields'
 
 class RegistrationForm extends Component {
   constructor(props) {
@@ -15,7 +16,10 @@ class RegistrationForm extends Component {
       username: 'spongebob',
       email: 'imspongebob@gmail.com',
       password: 'spongeBob1234',
-      confirmPassword: 'spongeBob1234'
+      confirmPassword: 'spongeBob1234',
+
+      emailOutput: '',
+      passwordOutput: ''
     }
     this.hooksRepository = hooksFactory.getRepository();
     this.hooksRepository.addHook(consts.AUTH, consts.AFTER_REGISTER, this.setUserDataInASyncStorage);
@@ -27,6 +31,18 @@ class RegistrationForm extends Component {
 
   onRegister = async () => {
     const { username, password, email } = this.state;
+    let emailOutput = ValidateFields.validateEmailInput(email, true)
+    let passwordOutput = ValidateFields.validatePasswordInput(password, true);
+
+    console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
+
+    if (emailOutput !== this.state.emailOutput) {
+      this.setState({ emailOutput });
+    }
+    if (passwordOutput !== this.state.passwordOutput) {
+      this.setState({ passwordOutput });
+    }
+    if (passwordOutput !== '' || emailOutput !== '') return;
 
     console.log('Credentials', `${username} + ${password}`);
     let userData = {
@@ -66,7 +82,7 @@ class RegistrationForm extends Component {
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 25 }}>Sign Up</Text>
-       
+
         <FloatingLabelInput
           label="Username"
           keyName="username"
@@ -74,6 +90,7 @@ class RegistrationForm extends Component {
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
           style={styles.input}
         />
+        <View style={{  height: 14 }}></View>
 
         <FloatingLabelInput
           label="Email"
@@ -83,6 +100,8 @@ class RegistrationForm extends Component {
           style={styles.input}
         />
 
+        <Text style={{ fontSize: 10, height: 14 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
+
         <FloatingLabelInput
           label="Password"
           keyName="password"
@@ -91,6 +110,7 @@ class RegistrationForm extends Component {
           style={styles.input}
           secureTextEntry={true}
         />
+        <Text style={{ fontSize: 10, height: 14 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
 
         <FloatingLabelInput
           label="Confirm Password"
@@ -100,6 +120,9 @@ class RegistrationForm extends Component {
           style={styles.input}
           secureTextEntry={true}
         />
+
+        <Text style={{ fontSize: 10, height: 14 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
+
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>
