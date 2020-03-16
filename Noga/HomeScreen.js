@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 import { AsyncStorage } from 'react-native';
-
+import consts from "./../src/modules/tools/client/hooks/consts"
 import hooksFactory from "../src/modules/tools/client/hooks/HooksFactory"
 import Auth from "./../src/modules/auth/Auth"
 
@@ -15,7 +15,7 @@ function verboseAsyncStorage() {
   AsyncStorage.getAllKeys((err, keys) => {
     AsyncStorage.multiGet(keys, (error, stores) => {
       stores.map((result, i, store) => {
-        console.log({ [store[i][0]]: store[i][1] });
+        console.log("mmm",{ [store[i][0]]: store[i][1] });
         return true;
       });
     });
@@ -51,7 +51,9 @@ export default class HomeScreen extends Component {
       password: 'E2PSzAmJ-5-ldKnl',
     };
     this.hooksRepository = hooksFactory.getRepository();
-    this.hooksRepository.addHook("auth", "AFTER_LOGIN", () => { console.log("hii from home screen") });
+    this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, (x) => { console.log("hiiii from home screen",x) });
+    this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, () => { console.log("hiiii shalva") });
+
   }
 
   async showUsersList() {
@@ -96,13 +98,13 @@ export default class HomeScreen extends Component {
 
       console.log("document.cookie?", document.cookie);
 
-      await AsyncStorage.setItem('klo', res.klo);
-      await AsyncStorage.setItem('kl', res.kl);
-      await AsyncStorage.setItem('kloo', res.kloo);
-      await AsyncStorage.setItem('klk', res.klk);
-      await AsyncStorage.setItem('access_token', res.id);
+      // await AsyncStorage.setItem('klo', res.klo);
+      // await AsyncStorage.setItem('kl', res.kl);
+      // await AsyncStorage.setItem('kloo', res.kloo);
+      // await AsyncStorage.setItem('klk', res.klk);
+      // await AsyncStorage.setItem('access_token', res.id);
 
-      verboseAsyncStorage();
+      // verboseAsyncStorage();
 
     } catch (err) {
       console.log("login err?", err);

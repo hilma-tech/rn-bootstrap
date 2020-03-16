@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import consts from "./../src/modules/tools/client/hooks/consts"
 import {
   StyleSheet,
   Text,
@@ -24,7 +25,7 @@ export default class RegistrationForm extends Component {
       password: 'spongeBob1234',
     }
     this.hooksRepository = hooksFactory.getRepository();
-    this.hooksRepository.addHook("auth", "AFTER_REGISTER", this.setUserDataInASyncStorage);
+    this.hooksRepository.addHook(consts.AUTH, consts.AFTER_REGISTER, this.setUserDataInASyncStorage);
 
     // this.hooksRepository = hooksFactory.getRepository();
     // hooksRepository.addHook("auth", "AFTER_REGISTER", this.setUserDataInASyncStorage);
@@ -42,11 +43,13 @@ export default class RegistrationForm extends Component {
     console.log('Credentials', `${fullName} + ${password}`);
     let userData = {
       realm: fullName,
-      username: fullName,
+    username: fullName,
       email: email,
       emailVerified: true,
       password: password
+    
     }
+    // let res = Auth.registerAsync(userData,"success")
 
     // let res = null;
     const [res, err] = await Auth.superAuthFetch('https://pumba.carmel6000.com/api/CustomUsers/', {
@@ -59,7 +62,7 @@ export default class RegistrationForm extends Component {
       console.log("login res?", res);
       console.log("document.cookie?", document.cookie);
       // verboseAsyncStorage();
-      this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
+      // this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
     }
     if (err) console.log("login err?", err);
   }
