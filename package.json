@@ -6,7 +6,16 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "test": "jest --watchAll"
+    "test": "jest --watchAll",
+    "help": "src/modules/scripts/./help.sh",
+    "install-modules": "src/modules/scripts/./install-all-modules.sh",
+    "update-modules": "src/modules/scripts/./update-modules.sh",
+    "install-module": "src/modules/scripts/./install-modules.sh",
+    "import-mongo": "src/modules/scripts/./import-mongo.sh",
+    "export-mongo": "src/modules/scripts/./export-mongo.sh",
+    "generate-config": "src/modules/scripts/./config-generator.sh",
+    "run-db-changes": "src/modules/scripts/./run-db-changes.sh",
+    "update-samples-json": "src/modules/scripts/./update-samples-json.sh"
   },
   "jest": {
     "preset": "jest-expo"
