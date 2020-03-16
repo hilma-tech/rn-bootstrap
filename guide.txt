@@ -86,7 +86,3 @@ If you want to add a Hooklist function of your own, all you need to do is:
 /////////////////////////////////
 PSA: this can be used for other things too - not just platforms.  
 
-questions:
-hoks list -איפה לפתוח ? לא בטוח יהיה AsyncStorage
-factory: import with some variables
-filter hooks-זה בסדר?

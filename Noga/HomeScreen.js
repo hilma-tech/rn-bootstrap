@@ -8,18 +8,21 @@ function HomeScreen(props) {
     const [accessToken, setAccessToken] = useState("");
 
     useEffect(() => {
-        let accessToken = await AsyncStorage.getItem("access_token");
-        setAccessToken(accessToken)
+        (async()=>{
+            let accessToken = await AsyncStorage.getItem("access_token");
+            setAccessToken(accessToken)
+        })()
+        
          
     }, []);
     return (
         //    <Text>HomeScreen</Text>
         <View>
-            <Text>{accessToken?`Hello! ${userNam} please`}
-            <Text style={{ color: 'blue' }}
+            <Text>{accessToken?`Hello! ${"userName"} `:"please"}
+            {!accessToken?<Text style={{ color: 'blue' }}
                     onPress={() => props.navigation.navigate('Login')} >
                      Login
-            </Text>
+            </Text>:null}
             </Text>
         </View >
     );
