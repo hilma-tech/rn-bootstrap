@@ -13,7 +13,7 @@
         "github": "https://github.com/carmel-6000/files-handler",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "auth",
@@ -22,7 +22,7 @@
         "github": "https://github.com/carmel-6000/carmel-react-auth",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "scripts",
@@ -30,7 +30,7 @@
         "github": "https://github.com/carmel-6000/scripts",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "notifications",
@@ -38,7 +38,7 @@
         "github": "https://github.com/carmel-6000/notifications",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "dashboard",
@@ -46,7 +46,7 @@
         "github": "https://github.com/carmel-6000/newdashboard",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "samples",
@@ -54,7 +54,7 @@
         "github": "https://github.com/carmel-6000/pumbasamples",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "idm",
@@ -63,7 +63,7 @@
         "github": "https://github.com/carmel-6000/idm",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
       },
       {
         "name": "supermodel",
@@ -72,7 +72,15 @@
         "mixins": "server/mixins",
         "fetch-version": "latest",
         "current-version": "1.0.0",
-        "enabled":true
+        "enabled": true
+      },
+      {
+        "name": "tools",
+        "path": "../src/modules/tools",
+        "github": "https://github.com/carmel-6000/carmel-tools",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled": false
       }
     ],
     "sources": [

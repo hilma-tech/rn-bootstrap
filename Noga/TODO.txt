@@ -1,4 +1,4 @@
-# safe hooks in auth - check if hooks is exist and than import
+# safe hooks in auth - check if hooks is exist and than import 
 
 # add nav bar - Home, Login, Registeration
     - Home: 

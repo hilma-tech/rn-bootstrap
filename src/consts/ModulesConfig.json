@@ -7,7 +7,8 @@
     "dashboard",
     "samples",
     "idm",
-    "supermodel"
+    "supermodel",
+    "tools"
   ],
   "notifications": {
     "publicVapidKey": ""
