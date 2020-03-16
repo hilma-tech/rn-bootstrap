@@ -4,8 +4,9 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import TabBarIcon from '../components/TabBarIcon';
-// import HomeScreen from '../screens/HomeScreen';
-import HomeScreen from "./../Noga/HomeScreen"
+import HomeScreen from '../Noga/HomeScreen';
+import RegistrationForm from '../Noga/RegistrationForm';
+import LoginScreen from "./../Noga/LoginScreen"
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import consts from "./../src/modules/tools/client/hooks/consts"
@@ -18,6 +19,7 @@ const config = Platform.select({
   default: {},
 });
 
+//create navigator - key is the route name and value is the component to display
 const HomeStack = createStackNavigator(
   {
     Home: HomeScreen,
@@ -41,42 +43,44 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const LoginStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Login: LoginScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+LoginStack.navigationOptions = {
+  tabBarLabel: 'Login',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+LoginStack.path = '';
 
-const SettingsStack = createStackNavigator(
+//create navigator - key is the route name and value is the component to display
+const RegisterStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Registeration: RegistrationForm,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+RegisterStack.navigationOptions = {
+  tabBarLabel: 'Registeration',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+RegisterStack.path = '';
 
+//create navigator - key is the route name and value is the component to display
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
-  SettingsStack,
+  LoginStack,
+  RegisterStack,
 });
 
 tabNavigator.path = '';
