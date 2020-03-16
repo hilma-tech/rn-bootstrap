@@ -62,13 +62,13 @@ LoginStack.path = '';
 //create navigator - key is the route name and value is the component to display
 const RegisterStack = createStackNavigator(
   {
-    Registeration: RegistrationForm,
+    registration: RegistrationForm,
   },
   config
 );
 
 RegisterStack.navigationOptions = {
-  tabBarLabel: 'Registeration',
+  tabBarLabel: 'registration',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),

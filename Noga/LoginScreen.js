@@ -88,7 +88,7 @@ export default class HomeScreen extends Component {
         /> */}
 
         <FloatingLabelInput
-          label="Email"
+          label="Email *"
           keyName="email"
           value={this.state.email}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
@@ -107,7 +107,7 @@ export default class HomeScreen extends Component {
         /> */}
 
         <FloatingLabelInput
-          label="Password"
+          label="Password *"
           keyName="password"
           value={this.state.password}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
@@ -121,7 +121,7 @@ export default class HomeScreen extends Component {
           <Text style={styles.signUpText}>Login</Text>
         </TouchableHighlight>
 
-        <Text style={{ color: '#1976d2', marginTop: 10 }} onPress={() => navigate('Registeration')}>Not registered?</Text>
+        <Text style={{ color: '#1976d2', marginTop: 10 }} onPress={() => navigate('registration')}>Not registered?</Text>
         {/* <Button
           title={'Login'}
           style={styles.input}
