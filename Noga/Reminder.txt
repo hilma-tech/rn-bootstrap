@@ -1,3 +1,5 @@
+-=-=-=-=-=-=-=- ROUTES -=-=-=-=-=-=-=-
+
 # to add route we have AppNavigator.js and AppNavigator.web.js
 
 # we can add to the switchNavigator object two things =>
@@ -8,3 +10,27 @@
     => define in the render the 'navigate'
        const { navigate } = this.props.navigation;
     => onPress = {() => navigate('Reg')}
+
+
+-=-=-=-=-=-=-=- MOBX -=-=-=-=-=-=-=-
+
+# npm install mobx mobx-react
+
+# open 'stores' folder inside src
+
+# create store (see example in example.store)
+
+# now you can provide the mobx class to which component you want by adding <Provider> that wrap the elements:
+    => import { inject, observer, Provider } from "mobx-react"
+    => import exampleStore from '../src/stores/example.store' //(your mobx store path)
+    => <Provider exampleStore={exampleStore}> <Text></Text> </Provider>
+
+# if you dont want to wrap every component with provider you can do this insted:
+    => create 'index.js' inside 'stores'
+    => inside index.js (react) / App.js (react-native) 
+        * import stores from './src/stores'
+        * import { Provider } from 'mobx-react'
+        * wrap the <App/> with <Provider {...stores}> 
+    => add 'import { inject, observer, Provider } from "mobx-react"' at the top of the page
+    => add 'export default inject("ExampleStore")(observer(RegistrationForm))' at the bottom of the page
+    => the mobx passed as this.props.ExampleStore.whatever

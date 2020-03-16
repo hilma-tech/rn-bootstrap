@@ -1,6 +1,6 @@
 'use strict';
 
-import HooksRepository from './../src/modules/tools/client/hooks/HooksRepository'
+import HooksRepository from './../src/modules/tools/client/components/hooks/HooksRepository'
 //import loadable from '@loadable/component';
 // import HooksList from "./HooksList"
 export default class HooksFactory {
@@ -23,7 +23,7 @@ export default class HooksFactory {
 
 
             } catch (err) {
-                console.log("err", err)
+                console.log("err from HooksFactory")
             }
 
         })

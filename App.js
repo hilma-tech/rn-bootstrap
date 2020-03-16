@@ -6,24 +6,31 @@ import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import AppNavigator from './navigation/AppNavigator';
+import { Provider } from 'mobx-react';
+import exampleStore from './src/stores/example.store';
+import stores from './src/stores';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
 
   if (!isLoadingComplete && !props.skipLoadingScreen) {
     return (
-      <AppLoading
-        startAsync={loadResourcesAsync}
-        onError={handleLoadingError}
-        onFinish={() => handleFinishLoading(setLoadingComplete)}
-      />
+      <Provider {...stores}  >
+        <AppLoading
+          startAsync={loadResourcesAsync}
+          onError={handleLoadingError}
+          onFinish={() => handleFinishLoading(setLoadingComplete)}
+        />
+      </Provider>
     );
   } else {
     return (
-      <View style={styles.container}>
-        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <AppNavigator />
-      </View>
+      <Provider {...stores} >
+        <View style={styles.container}>
+          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+          <AppNavigator />
+        </View>
+      </Provider>
     );
   }
 }

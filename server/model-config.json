@@ -1,0 +1,282 @@
+{
+  "_meta": {
+    "modules": [
+      {
+        "name": "fileshandler",
+        "path": "../src/modules/fileshandler",
+        "routes": "server/routes",
+        "mixins": "server/mixins",
+        "models": "server/models",
+        "autoApplyMixins": [
+          "FilesHandler"
+        ],
+        "github": "https://github.com/carmel-6000/files-handler",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "auth",
+        "path": "../src/modules/auth",
+        "models": "server/models",
+        "github": "https://github.com/carmel-6000/carmel-react-auth",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "scripts",
+        "path": "../src/modules/scripts",
+        "github": "https://github.com/carmel-6000/scripts",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "notifications",
+        "path": "../src/modules/notifications",
+        "github": "https://github.com/carmel-6000/notifications",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "dashboard",
+        "path": "../src/modules/dashboard",
+        "github": "https://github.com/carmel-6000/newdashboard",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "samples",
+        "path": "../src/modules/samples",
+        "github": "https://github.com/carmel-6000/pumbasamples",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "idm",
+        "path": "../src/modules/idm",
+        "routes": "server/routes",
+        "github": "https://github.com/carmel-6000/idm",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      },
+      {
+        "name": "supermodel",
+        "path": "../src/modules/supermodel",
+        "github": "https://github.com/carmel-6000/supermodel",
+        "mixins": "server/mixins",
+        "fetch-version": "latest",
+        "current-version": "1.0.0",
+        "enabled":true
+      }
+    ],
+    "sources": [
+      "loopback/server/models",
+      "../src/modules/auth",
+      "../common/models",
+      "./models",
+      "../src/modules/fileshandler/server/models",
+      "../src/modules/auth/server/models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins",
+      "../src/modules/fileshandler/server/mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "msql",
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "CustomUser": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "AccessToken": {
+    "dataSource": "msql",
+    "public": false
+  },
+  "Email": {
+    "dataSource": "myEmailDataSource"
+  },
+  "Games": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "Images": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "Files": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "BaseFiles": {
+    "public": false,
+    "dataSource": "msql"
+  },
+  "BaseImages": {
+    "public": false,
+    "dataSource": "msql"
+  },
+  "RecordsPermissions": {
+    "public": true,
+    "dataSource": "msql"
+  },
+  "ACL": {
+    "public": false,
+    "dataSource": "msql"
+  },
+  "RoleMapping": {
+    "dataSource": "msql"
+  },
+  "Role": {
+    "public": false,
+    "dataSource": "msql"
+  },
+  "BaseVideos": {
+    "public": false,
+    "dataSource": "msql"
+  },
+  "members": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "contact_details": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "medical_details": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "vehicles": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "clothing_size": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "travel_form_requirements": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "members_jobs": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "vehicles_maintenance": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "members_and_applicants": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "application_processes": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "members_activities_hours": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "activities": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "storage_items": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "payments": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "events": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "event_tasks": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "categories": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "vacations": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "rescued_persons": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "vehicle_trips": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "partner_forces": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "external_contacts": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "active_forces": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "persons_active_forces": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "mlrt": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "medics": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "paramedics": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "running_water": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "drones": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "air_patrol": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "detection": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "jobs": {
+    "dataSource": "msql",
+    "public": true
+  },
+  "BaseAudios": {
+    "public": false,
+    "dataSource": "msql"
+  }
+}
