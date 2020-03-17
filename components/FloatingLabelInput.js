@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { View, StatusBar, TextInput, Animated, StyleSheet } from 'react-native';
 
 class FloatingLabelInput extends Component {
-    state = {
-        isFocused: false,
-    };
-
-    componentWillMount() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            isFocused: false,
+        };
         this._animatedIsFocused = new Animated.Value(this.props.value === '' ? 0 : 1);
     }
 
@@ -24,23 +24,45 @@ class FloatingLabelInput extends Component {
         const { keyName, label, ...props } = this.props;
         const labelStyle = {
             position: 'absolute',
-            zIndex: -1,
+            zIndex: this._animatedIsFocused.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-1, 1],
+            }),
             left: this._animatedIsFocused.interpolate({
                 inputRange: [0, 1],
-                outputRange: [10, 0],
+                outputRange: [10, 5],
             }),
             top: this._animatedIsFocused.interpolate({
                 inputRange: [0, 1],
-                outputRange: [30, 0],
+                outputRange: [30, 6],
             }),
             fontSize: this._animatedIsFocused.interpolate({
                 inputRange: [0, 1],
                 outputRange: [15, 12],
             }),
-            color: this._animatedIsFocused.interpolate({
+            color: this.props.value !== '' && !this.state.isFocused ? "#00000054" :
+                this._animatedIsFocused.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: ['#aaa', '#1976d2'],
+                }),
+            backgroundColor: this._animatedIsFocused.interpolate({
                 inputRange: [0, 1],
-                outputRange: ['#aaa', 'rgba(42, 72, 127, 0.73)'],
+                outputRange: ['#fff', '#fff'],
             }),
+            padding: this._animatedIsFocused.interpolate({
+                inputRange: [0, 1],
+                outputRange: [0, 4],
+            }),
+        };
+        const floatingInput = {
+            width: 300,
+            fontSize: 15,
+            color: '#000',
+            borderWidth: 1,
+            borderColor: '#00000054',
+            padding: 10,
+            borderRadius: 3,
+            marginBottom: 2
         };
 
         return (
@@ -48,10 +70,11 @@ class FloatingLabelInput extends Component {
                 <Animated.Text style={labelStyle}>
                     {label}
                 </Animated.Text>
+
                 <TextInput
                     {...props}
                     onChangeText={(value) => props.onChangeText(keyName, value)}
-                    style={styles.floatingInput}
+                    style={floatingInput}
                     onFocus={this.handleFocus}
                     onBlur={this.handleBlur}
                     blurOnSubmit

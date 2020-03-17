@@ -1,13 +1,13 @@
 # safe hooks in auth - check if hooks is exist and than import 
 
-# add nav bar - Home, Login, Registeration
+# add nav bar - Home, Login, registration
     - Home: 
         if user is connected (asyncStorage if react native...) : "Hi {name}"
         if no user : "please <link>login</link>"
     - Login :
         email validation - from tools=> validate tools
         password validation - from tools=> validate tools
-    - Registeration : 
+    - registration : 
         add fields with validation 
         add rnRegister method to auth
 

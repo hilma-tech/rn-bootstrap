@@ -19,22 +19,22 @@ class RegistrationForm extends Component {
       confirmPassword: 'spongeBob1234',
 
       emailOutput: '',
-      passwordOutput: ''
+      passwordOutput: '',
+      confirmPasswordOutput: ''
     }
     this.hooksRepository = hooksFactory.getRepository();
     this.hooksRepository.addHook(consts.AUTH, consts.AFTER_REGISTER, this.setUserDataInASyncStorage);
   }
 
-  onClickListener = (viewId) => {
-    this.onRegister()
-  }
+  // onClickListener = (viewId) => {
+  //   this.onRegister()
+  // }
+  validateFields = () => {
+    const { username, email, password, confirmPassword } = this.state;
 
-  onRegister = async () => {
-    const { username, password, email } = this.state;
     let emailOutput = ValidateFields.validateEmailInput(email, true)
     let passwordOutput = ValidateFields.validatePasswordInput(password, true);
-
-    console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
+    let confirmPasswordOutput = ValidateFields.validateConfirmPasswordInput(password, true, confirmPassword)
 
     if (emailOutput !== this.state.emailOutput) {
       this.setState({ emailOutput });
@@ -42,7 +42,18 @@ class RegistrationForm extends Component {
     if (passwordOutput !== this.state.passwordOutput) {
       this.setState({ passwordOutput });
     }
-    if (passwordOutput !== '' || emailOutput !== '') return;
+    if (confirmPasswordOutput !== this.state.confirmPasswordOutput) {
+      this.setState({ confirmPasswordOutput });
+    }
+    if (passwordOutput !== '' || emailOutput !== '' || confirmPasswordOutput !== '') return false;
+    return true
+  }
+
+  onRegister = async () => {
+    const { username, email, password, confirmPassword } = this.state;
+
+    let isValid = this.validateFields()
+    if (!isValid) return;
 
     console.log('Credentials', `${username} + ${password}`);
     let userData = {
@@ -90,7 +101,7 @@ class RegistrationForm extends Component {
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
           style={styles.input}
         />
-        <View style={{  height: 14 }}></View>
+        <View style={{ height: 10 }}></View>
 
         <FloatingLabelInput
           label="Email"
@@ -100,7 +111,7 @@ class RegistrationForm extends Component {
           style={styles.input}
         />
 
-        <Text style={{ fontSize: 10, height: 14 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
+        <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
 
         <FloatingLabelInput
           label="Password"
@@ -110,7 +121,7 @@ class RegistrationForm extends Component {
           style={styles.input}
           secureTextEntry={true}
         />
-        <Text style={{ fontSize: 10, height: 14 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
+        <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
 
         <FloatingLabelInput
           label="Confirm Password"
@@ -121,9 +132,9 @@ class RegistrationForm extends Component {
           secureTextEntry={true}
         />
 
-        <Text style={{ fontSize: 10, height: 14 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
+        <Text style={{ fontSize: 10, height: 10 }}>{this.state.confirmPasswordOutput ? this.state.confirmPasswordOutput : ''}</Text>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onRegister('sign_up')}>
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>
 
@@ -147,34 +158,11 @@ class RegistrationForm extends Component {
 
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    // borderBottomColor: '#F5FCFF',
-    // backgroundColor: '#FFFFFF',
-    // borderRadius: 30,
-    // borderBottomWidth: 1,
-    // width: 250,
-    // height: 45,
-    // marginBottom: 20,
-    // flexDirection: 'row',
-    // alignItems: 'center'
-  },
-  inputs: {
-    // height: 45,
-    // marginLeft: 16,
-    // borderBottomColor: '#717D93',
-    // flex: 1,
-  },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     // backgroundColor: '#ecf0f1',
-  },
-  inputIcon: {
-    // width: 30,
-    // height: 30,
-    // marginLeft: 15,
-    // justifyContent: 'center'
   },
   buttonContainer: {
     height: 30,
