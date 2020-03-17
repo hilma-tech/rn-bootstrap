@@ -72,7 +72,7 @@ class RegistrationForm extends Component {
     })
     if (res) {
       console.log("login res?", res);
-      console.log("document.cookie?", document.cookie);
+      // console.log("document.cookie?", document.cookie);
       // this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
     }
     if (err) console.log("login err?", err);
