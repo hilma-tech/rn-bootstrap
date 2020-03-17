@@ -45,10 +45,7 @@ class FloatingLabelInput extends Component {
                     inputRange: [0, 1],
                     outputRange: ['#aaa', '#1976d2'],
                 }),
-            backgroundColor: this._animatedIsFocused.interpolate({
-                inputRange: [0, 1],
-                outputRange: ['#fff', '#fff'],
-            }),
+            backgroundColor: '#fff',
             padding: this._animatedIsFocused.interpolate({
                 inputRange: [0, 1],
                 outputRange: [0, 4],
