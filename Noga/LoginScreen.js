@@ -6,8 +6,9 @@ import hooksFactory from "../src/modules/tools/client/hooks/HooksFactory"
 import Auth from "../src/modules/auth/Auth"
 import ValidateFields from '../src/modules/tools/ValidateFields'
 import FloatingLabelInput from '../components/FloatingLabelInput.js'
+import { inject, observer } from "mobx-react";
 
-export default class HomeScreen extends Component {
+class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -35,6 +36,7 @@ export default class HomeScreen extends Component {
       }
       else {
         this.setState({ loginErr: '' });
+        this.props.ExampleStore.setUserName(email)
         this.props.navigation.navigate("Home")
       }
     } catch (err) { console.log("login err?", err); }
@@ -66,7 +68,7 @@ export default class HomeScreen extends Component {
           value={this.state.password}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
           style={styles.input}
-          // secureTextEntry={true}
+          secureTextEntry={true}
         />
 
         <Text style={{ fontSize: 15, height: 10, color: 'red' }}>{this.state.loginErr ? this.state.loginErr : ''}</Text>
@@ -81,8 +83,9 @@ export default class HomeScreen extends Component {
     );
   }
 }
+// export default LoginScreen
 
-
+export default inject("ExampleStore")(observer(LoginScreen));
 
 
 

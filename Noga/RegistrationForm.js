@@ -6,7 +6,7 @@ import FloatingLabelInput from '../components/FloatingLabelInput.js';
 import { AsyncStorage } from 'react-native';
 import hooksFactory from '../src/modules/tools/client/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
-import exampleStore from '../src/stores/example.store';
+// import exampleStore from '../src/stores/example.store';
 import ValidateFields from '../src/modules/tools/ValidateFields'
 
 class RegistrationForm extends Component {
@@ -15,9 +15,9 @@ class RegistrationForm extends Component {
     this.state = {
       username: 'spongebob',
       email: 'imspongebob@gmail.com',
-      password: 'spongeBob1234',
-      confirmPassword: 'spongeBob1234',
-
+      password: 'spongeBob12345%',
+      confirmPassword: 'spongeBob12345%',
+      registerationMsg: "",
       emailOutput: '',
       passwordOutput: '',
       confirmPasswordOutput: ''
@@ -64,18 +64,25 @@ class RegistrationForm extends Component {
       password: password
     }
 
-    const [res, err] = await Auth.superAuthFetch('https://pumba.carmel6000.com/api/CustomUsers/', {
-      method: 'POST',
-      credentials: 'same-origin',
-      headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
-      body: JSON.stringify(userData)
-    })
-    if (res) {
-      console.log("login res?", res);
+    // const [res, err] = await Auth.superAuthFetch('https://pumba.carmel6000.com/api/CustomUsers/', {
+    //   method: 'POST',
+    //   credentials: 'same-origin',
+    //   headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(userData)
+    // })
+    const res = await Auth.registerAsync(userData)
+    if (res.ok) {
+      console.log("login res?", res.ok);
+      this.props.ExampleStore.setUserName(email)
+      this.props.navigation.navigate("Home")
+
       // console.log("document.cookie?", document.cookie);
       // this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
     }
-    if (err) console.log("login err?", err);
+    if (res.ok === false) {
+      console.log("login err?", res);
+      this.setState({registerationMsg:res.error[0]})
+    }
   }
 
   setUserDataInASyncStorage = async (res) => {
@@ -133,6 +140,7 @@ class RegistrationForm extends Component {
         />
 
         <Text style={{ fontSize: 10, height: 10 }}>{this.state.confirmPasswordOutput ? this.state.confirmPasswordOutput : ''}</Text>
+        <Text style={{ fontSize: 15, height: 10, color: 'red' }}>{this.state.registerationMsg}</Text>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onRegister('sign_up')}>
           <Text style={styles.signUpText}>Sign up</Text>
