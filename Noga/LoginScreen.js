@@ -14,58 +14,30 @@ export default class HomeScreen extends Component {
       email: 'admin@carmel6000.amitnet.org',
       password: 'E2PSzAmJ-5-ldKnl',
       emailOutput: '',
-      passwordOutput: ''
+      passwordOutput: '',
+      loginErr: ''
     };
     this.hooksRepository = hooksFactory.getRepository();
     this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, (x) => { console.log("hiiii from home screen", x) });
     this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, () => { console.log("hiiii shalva") });
   }
 
-  // async showUsersList() {
-  //   let res = null;
-  //   try {
-  //     let at = await AsyncStorage.getItem('access_token');
-  //     at = "?access_token=" + at;
-  //     res = await fetch('https://pumba.carmel6000.com/api/CustomUsers' + at, {
-  //       //credentials: "same-origin" //or "include" both doesn't work
-  //     }).then(res => res.json());
-  //     console.log("USERS list res", res);
-  //   } catch (err) {
-  //     console.log("err", err);
-  //   }
-  // }
-
   async onLogin() {
     const { email, password } = this.state;
-
-    // let emailOutput = ValidateFields.validateEmailInput(email, true)
-    // let passwordOutput = ValidateFields.validatePasswordInput(password, true);
-
-    // console.log("emailOutput", emailOutput, "passwordOutput", passwordOutput)
-
-    // if (emailOutput !== this.state.emailOutput) {
-    //   this.setState({ emailOutput });
-    // }
-    // if (passwordOutput !== this.state.passwordOutput) {
-    //   this.setState({ passwordOutput });
-    // }
-    // if (passwordOutput !== '' || emailOutput !== '') return;
 
     console.log('Credentials', `${email} + ${password}`);
     let res = null;
     try {
-      res = await Auth.login(email, password, res => res.json());
-      // console.log("login res?", res);
-      // console.log("document.cookie?", document.cookie);
-      // await AsyncStorage.setItem('klo', res.klo);
-      // await AsyncStorage.setItem('kl', res.kl);
-      // await AsyncStorage.setItem('kloo', res.kloo);
-      // await AsyncStorage.setItem('klk', res.klk);
-      // await AsyncStorage.setItem('access_token', res.id);
-      // verboseAsyncStorage();
-    } catch (err) {
-      console.log("login err?", err);
-    }
+      res = await Auth.login(email, password, null);
+      if (!res.success) {
+        this.setState({ loginErr: res.msg.error.msg });
+        return;
+      }
+      else {
+        this.setState({ loginErr: '' });
+        this.props.navigation.navigate("Home")
+      }
+    } catch (err) { console.log("login err?", err); }
   }
 
   handleChange = (name, value) => {
@@ -75,17 +47,10 @@ export default class HomeScreen extends Component {
 
   render() {
     const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.container}>
+  
         <Text style={{ fontSize: 25 }}>Sign In</Text>
-
-        {/* <TextInput
-          value={this.state.email}
-          onChangeText={(value) => this.handleChange("email", value)}
-          placeholder={'Email'}
-          style={styles.input}
-        /> */}
 
         <FloatingLabelInput
           label="Email *"
@@ -95,43 +60,23 @@ export default class HomeScreen extends Component {
           style={styles.input}
         />
 
-
-        {/* <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text> */}
-
-        {/* <TextInput
-          value={this.state.password}
-          onChangeText={(value) => this.handleChange("password", value)}
-          placeholder={'Password'}
-          style={styles.input}
-          secureTextEntry={true}
-        /> */}
-
         <FloatingLabelInput
           label="Password *"
           keyName="password"
           value={this.state.password}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
           style={styles.input}
-          secureTextEntry={true}
+          // secureTextEntry={true}
         />
 
-        {/* <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text> */}
+        <Text style={{ fontSize: 15, height: 10, color: 'red' }}>{this.state.loginErr ? this.state.loginErr : ''}</Text>
 
         <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={this.onLogin.bind(this)}>
           <Text style={styles.signUpText}>Login</Text>
         </TouchableHighlight>
 
         <Text style={{ color: '#1976d2', marginTop: 10 }} onPress={() => navigate('registration')}>Not registered?</Text>
-        {/* <Button
-          title={'Login'}
-          style={styles.input}
-          onPress={this.onLogin.bind(this)}
-        />
 
-        <Button
-          title={'register'}
-          style={styles.input}
-          onPress={() => navigate('Reg')} /> */}
       </View>
     );
   }

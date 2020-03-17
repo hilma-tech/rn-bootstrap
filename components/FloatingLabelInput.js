@@ -59,7 +59,7 @@ class FloatingLabelInput extends Component {
             fontSize: 15,
             color: '#000',
             borderWidth: 1,
-            borderColor: '#00000054',
+            borderColor: this.state.isFocused ? '#1976d2' : '#00000054',
             padding: 10,
             borderRadius: 3,
             marginBottom: 2
