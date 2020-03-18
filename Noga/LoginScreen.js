@@ -36,6 +36,7 @@ class LoginScreen extends Component {
       }
       else {
         this.setState({ loginErr: '' });
+        
         this.props.ExampleStore.setUserName(email)
         this.props.navigation.navigate("Home")
       }

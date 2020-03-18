@@ -60,10 +60,12 @@ function HomeScreen(props) {
     // },[]);
     useEffect(() => {
         (async () => {
-            let accessToken = await AsyncStorage.getItem("access_token") ? "true" : "false";
-            setAccessToken(accessToken)
+            if (accessToken == "wait") {
+                let accessToken = await AsyncStorage.getItem("access_token") ? "true" : "false";
+                setAccessToken(accessToken)
+            }
             console.log("exampleStore", props.ExampleStore)
-            console.log("accessToken",accessToken)
+            console.log("accessToken", accessToken)
             props.ExampleStore.getUserName()
 
         })()
@@ -78,7 +80,7 @@ function HomeScreen(props) {
         props.navigation.navigate("registration")
 
     }
-   
+
 
 
     return (

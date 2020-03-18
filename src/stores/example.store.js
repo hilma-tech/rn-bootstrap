@@ -13,8 +13,11 @@ class ExampleStore {
     }
     async getUserName() {
         this.userName = await AsyncStorage.getItem("userName")
-        let index = this.userName.indexOf("@");
-        this.userName = this.userName.slice(0, index)
+        if(this.userName){
+            let index = this.userName.indexOf("@");
+            this.userName = this.userName.slice(0, index)
+        }
+       
 
     }
 
