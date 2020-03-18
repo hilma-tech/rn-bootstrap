@@ -55,17 +55,21 @@ function HomeScreen(props) {
 
     const [userName, setUserName] = useState("spongebob");
 
+    // useEffect(() => {
+    //     this.props.ExampleStore.getUserName()
+    // },[]);
     useEffect(() => {
         (async () => {
             let accessToken = await AsyncStorage.getItem("access_token") ? "true" : "false";
             setAccessToken(accessToken)
             console.log("exampleStore", props.ExampleStore)
             console.log("accessToken",accessToken)
+            props.ExampleStore.getUserName()
 
         })()
 
 
-    });
+    },[]);
 
     const onClickLogin = () => {
         props.navigation.navigate("Login")
@@ -74,6 +78,7 @@ function HomeScreen(props) {
         props.navigation.navigate("registration")
 
     }
+   
 
 
     return (

@@ -1,13 +1,20 @@
 import { observable, decorate, action, computed } from 'mobx';
-
+import { AsyncStorage } from 'react-native';
 class ExampleStore {
     text = "this is an example text";
     userName = "";
 
-    setUserName(userName){
-        let index =userName.indexOf("@");
+    async setUserName(userName) {
+        let index = userName.indexOf("@");
         this.userName = userName.slice(0, index)
-        console.log("kkk",this.userName)
+        console.log("kkk", this.userName)
+        await AsyncStorage.setItem("userName", userName)
+        // props.ExampleStore.userName
+    }
+    async getUserName() {
+        this.userName = await AsyncStorage.getItem("userName")
+        let index = this.userName.indexOf("@");
+        this.userName = this.userName.slice(0, index)
 
     }
 
@@ -16,8 +23,9 @@ class ExampleStore {
 // another way to decorate variables with observable
 decorate(ExampleStore, {
     text: observable,
-    userName:observable,
-    setUserName:action
+    userName: observable,
+    getUserName:action,
+    setUserName: action
 });
 
 // export class
