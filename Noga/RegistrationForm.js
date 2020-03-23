@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import consts from "./../src/modules/tools/client/hooks/consts"
 import { inject, observer } from "mobx-react";
-import { StyleSheet, Text, View, TextInput, Button, TouchableHighlight, Image, Alert } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import FloatingLabelInput from '../components/FloatingLabelInput.js';
 import { AsyncStorage } from 'react-native';
 import hooksFactory from '../src/modules/tools/client/hooks/HooksFactory';
 import Auth from '../src/modules/auth/Auth'
-// import exampleStore from '../src/stores/example.store';
 import ValidateFields from '../src/modules/tools/ValidateFields'
 
 class RegistrationForm extends Component {
@@ -23,14 +22,12 @@ class RegistrationForm extends Component {
       confirmPasswordOutput: ''
     }
     this.hooksRepository = hooksFactory.getRepository();
-    this.hooksRepository.addHook(consts.AUTH, consts.AFTER_REGISTER, this.setUserDataInASyncStorage);
+    console.log("consts.AFTER_REGISTER",consts.AFTER_REGISTER)
+    // this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_REGISTER, this.setUserDataInASyncStorage);
   }
 
-  // onClickListener = (viewId) => {
-  //   this.onRegister()
-  // }
   validateFields = () => {
-    const { username, email, password, confirmPassword } = this.state;
+    const { email, password, confirmPassword } = this.state;
 
     let emailOutput = ValidateFields.validateEmailInput(email, true)
     let passwordOutput = ValidateFields.validatePasswordInput(password, true);
@@ -49,13 +46,13 @@ class RegistrationForm extends Component {
     return true
   }
 
-  onRegister = async () => {
-    const { username, email, password, confirmPassword } = this.state;
+  onRegister =  () => {
+    (async()=>{
+    const { username, email, password } = this.state;
 
     let isValid = this.validateFields()
     if (!isValid) return;
 
-    console.log('Credentials', `${username} + ${password}`);
     let userData = {
       realm: username,
       username: username,
@@ -72,31 +69,30 @@ class RegistrationForm extends Component {
     // })
     const res = await Auth.registerAsync(userData)
     if (res.ok) {
-      console.log("login res?", res.ok);
-      this.props.ExampleStore.setUserName(email)
-      this.props.navigation.navigate("Home")
 
-      // console.log("document.cookie?", document.cookie);
-      // this.hooksRepository.applyHook("auth", "AFTER_REGISTER", res);
+      this.props.ExampleStore.setUserName(email)
+      await Auth.login(email,password)
+      this.props.ExampleStore.at = await AsyncStorage.getItem("access_token") ? "true" : "false";
+      this.props.navigation.navigate("Home")
     }
+
     if (res.ok === false) {
       console.log("login err?", res);
-      this.setState({registerationMsg:res.error[0]})
+      this.setState({ registerationMsg: res.error[0] })
     }
+  })()
   }
 
   setUserDataInASyncStorage = async (res) => {
-    await AsyncStorage.setItem('user_res', JSON.stringify(res));
+    // await AsyncStorage.setItem('user_res', JSON.stringify(res));
   }
 
   handleChange = (name, value) => {
-    console.log("valuee", name)
     this.setState({ [name]: value })
   }
 
   render() {
     const { navigate } = this.props.navigation;
-    // console.log("ExampleStore", this.props.ExampleStore)
     return (
       <View style={styles.container}>
         <Text style={{ fontSize: 25 }}>Sign Up</Text>
@@ -154,23 +150,11 @@ class RegistrationForm extends Component {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: '#ecf0f1',
   },
   buttonContainer: {
     height: 30,

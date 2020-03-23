@@ -5,17 +5,12 @@ import { AsyncStorage } from 'react-native';
 import Auth from '../src/modules/auth/Auth';
 
 function HomeScreen(props) {
-    // Declare a new state variable, which we'll call "count"
-    const [accessToken, setAccessToken] = useState("wait");
 
     useEffect(() => {
         (async () => {
-            if (accessToken == "wait") {
-                let accessToken = await AsyncStorage.getItem("access_token") ? "true" : "false";
-                setAccessToken(accessToken)
+            if (props.ExampleStore.at == "wait") {
+                props.ExampleStore.at = await AsyncStorage.getItem("access_token") ? "true" : "false";
             }
-            console.log("exampleStore", props.ExampleStore)
-            console.log("accessToken", accessToken)
             props.ExampleStore.getUserName()
         })()
     }, []);
@@ -29,26 +24,24 @@ function HomeScreen(props) {
     }
 
     const logout = () => {
+        props.ExampleStore.at = "false"
         Auth.logout(goToLogin)
     }
 
     return (
         <View style={styles.container}>
-            {/* <Text>HomeScreen</Text> */}
-            {accessToken === "wait" ?
-                <Text >
-                    loading...
-            </Text> :
+            {props.ExampleStore.at === "wait" ?
+                <Text >loading...</Text>
+                :
                 <View style={styles.container}>
                     <Text style={styles.textWelcome}>Welcome!</Text>
 
-                    {accessToken === "true" ?
-                        <View style={{textAlign: "center"}}>
+                    {props.ExampleStore.at === "true" ?
+                        <View style={{ textAlign: "center" }}>
                             <Text>{props.ExampleStore.userName}</Text>
                             <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={logout}>
                                 <Text style={styles.loginText}>Logout</Text>
                             </TouchableOpacity>
-
                         </View>
                         :
                         <View>
@@ -59,8 +52,7 @@ function HomeScreen(props) {
                             <TouchableOpacity style={[styles.buttonContainer, styles.loginButton]} onPress={goToLogin}>
                                 <Text style={styles.loginText}>Login</Text>
                             </TouchableOpacity>
-                        </View>
-                    }
+                        </View>}
                 </View >
             }
         </View>
@@ -78,7 +70,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        // backgroundColor: '#ecf0f1',
     },
     buttonContainer: {
         height: 30,

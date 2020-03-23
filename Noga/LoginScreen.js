@@ -23,24 +23,24 @@ class LoginScreen extends Component {
     this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, () => { console.log("hiiii shalva") });
   }
 
-  async onLogin() {
-    const { email, password } = this.state;
-
-    console.log('Credentials', `${email} + ${password}`);
-    let res = null;
-    try {
-      res = await Auth.login(email, password, null);
-      if (!res.success) {
-        this.setState({ loginErr: res.msg.error.msg });
-        return;
-      }
-      else {
-        this.setState({ loginErr: '' });
-        
-        this.props.ExampleStore.setUserName(email)
-        this.props.navigation.navigate("Home")
-      }
-    } catch (err) { console.log("login err?", err); }
+  onLogin() {
+    (async () => {
+      const { email, password } = this.state;
+      let res = null;
+      try {
+        res = await Auth.login(email, password, null);
+        if (!res.success) {
+          this.setState({ loginErr: res.msg.error.msg });
+          return;
+        }
+        else {
+          this.setState({ loginErr: '' });
+          this.props.ExampleStore.setUserName(email)
+          this.props.ExampleStore.at = await AsyncStorage.getItem("access_token") ? "true" : "false";
+          this.props.navigation.navigate("Home")
+        }
+      } catch (err) { console.log("login err?", err); }
+    })();
   }
 
   handleChange = (name, value) => {
@@ -52,7 +52,7 @@ class LoginScreen extends Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-  
+
         <Text style={{ fontSize: 25 }}>Sign In</Text>
 
         <FloatingLabelInput
@@ -60,7 +60,6 @@ class LoginScreen extends Component {
           keyName="email"
           value={this.state.email}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
-          style={styles.input}
         />
 
         <FloatingLabelInput
@@ -68,7 +67,6 @@ class LoginScreen extends Component {
           keyName="password"
           value={this.state.password}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
-          style={styles.input}
           secureTextEntry={true}
         />
 
@@ -84,15 +82,8 @@ class LoginScreen extends Component {
     );
   }
 }
-// export default LoginScreen
 
 export default inject("ExampleStore")(observer(LoginScreen));
-
-
-
-
-
-
 
 
 const styles = StyleSheet.create({
@@ -100,15 +91,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    // backgroundColor: '#ecf0f1',
-  },
-  input: {
-    // width: 200,
-    // height: 44,
-    // padding: 10,
-    // borderWidth: 1,
-    // borderColor: 'black',
-    // marginBottom: 10,
   },
   buttonContainer: {
     height: 30,
