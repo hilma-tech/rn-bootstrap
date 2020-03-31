@@ -12,15 +12,16 @@ class RegistrationForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'spongebob',
-      email: 'imspongebob@gmail.com',
-      password: 'spongeBob12345%',
-      confirmPassword: 'spongeBob12345%',
+      username:"", //'spongebob',
+      email:"", //'imspongebob@gmail.com',
+      password: "",//'spongeBob12345%',
+      confirmPassword:"", //'spongeBob12345%',
       registerationMsg: "",
       emailOutput: '',
       passwordOutput: '',
       confirmPasswordOutput: ''
     }
+    this.baseState= this.state;
     this.hooksRepository = hooksFactory.getRepository();
     console.log("consts.AFTER_REGISTER",consts.AFTER_REGISTER)
     // this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_REGISTER, this.setUserDataInASyncStorage);
@@ -73,6 +74,7 @@ class RegistrationForm extends Component {
       this.props.ExampleStore.setUserName(email)
       await Auth.login(email,password)
       this.props.ExampleStore.at = await AsyncStorage.getItem("access_token") ? "true" : "false";
+      this.setState(this.baseState)
       this.props.navigation.navigate("Home")
     }
 
@@ -98,7 +100,7 @@ class RegistrationForm extends Component {
         <Text style={{ fontSize: 25 }}>Sign Up</Text>
 
         <FloatingLabelInput
-          label="Username"
+          label="Username *"
           keyName="username"
           value={this.state.username}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
@@ -107,7 +109,7 @@ class RegistrationForm extends Component {
         <View style={{ height: 10 }}></View>
 
         <FloatingLabelInput
-          label="Email"
+          label="Email *"
           keyName="email"
           value={this.state.email}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
@@ -117,7 +119,7 @@ class RegistrationForm extends Component {
         <Text style={{ fontSize: 10, height: 10 }}>{this.state.emailOutput ? this.state.emailOutput : ''}</Text>
 
         <FloatingLabelInput
-          label="Password"
+          label="Password *"
           keyName="password"
           value={this.state.password}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}
@@ -127,7 +129,7 @@ class RegistrationForm extends Component {
         <Text style={{ fontSize: 10, height: 10 }}>{this.state.passwordOutput ? this.state.passwordOutput : ''}</Text>
 
         <FloatingLabelInput
-          label="Confirm Password"
+          label="Confirm Password *"
           keyName="confirmPassword"
           value={this.state.confirmPassword}
           onChangeText={(keyName, value) => this.handleChange(keyName, value)}

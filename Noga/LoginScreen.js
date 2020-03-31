@@ -12,12 +12,13 @@ class LoginScreen extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'admin@carmel6000.amitnet.org',
-      password: 'E2PSzAmJ-5-ldKnl',
+      email: "",//'admin@carmel6000.amitnet.org',
+      password: "",//'E2PSzAmJ-5-ldKnl',
       emailOutput: '',
       passwordOutput: '',
       loginErr: ''
     };
+    this.baseState = this.state;
     this.hooksRepository = hooksFactory.getRepository();
     this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, (x) => { console.log("hiiii from home screen", x) });
     this.hooksRepository.addHook(consts.AUTH, consts.HOOK__AFTER_LOGIN, () => { console.log("hiiii shalva") });
@@ -34,9 +35,10 @@ class LoginScreen extends Component {
           return;
         }
         else {
-          this.setState({ loginErr: '' });
+          // this.setState({ loginErr: '' });
           this.props.ExampleStore.setUserName(email)
           this.props.ExampleStore.at = await AsyncStorage.getItem("access_token") ? "true" : "false";
+          this.setState(this.baseState)
           this.props.navigation.navigate("Home")
         }
       } catch (err) { console.log("login err?", err); }
