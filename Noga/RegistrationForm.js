@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import consts from "./../src/modules/tools/client/hooks/consts"
+import consts from "./../src/modules/tools/client/hooks/consts.json"
 import { inject, observer } from "mobx-react";
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
 import FloatingLabelInput from '../components/FloatingLabelInput.js';

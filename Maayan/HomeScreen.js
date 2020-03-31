@@ -1,7 +1,7 @@
 // import React, { Component } from 'react';
 // import { Alert, Button, TextInput, View, StyleSheet } from 'react-native';
 // import { AsyncStorage } from 'react-native';
-// import consts from "../src/modules/tools/client/components/hooks/consts"
+// import consts from "../src/modules/tools/client/components/hooks/consts.json"
 // import hooksFactory from "./../src/modules/tools/client/components/hooks/HooksFactory"
 // import Auth from "./../src/modules/auth/Auth"
 // function getCookieByKey(name) { // mv to tools/cookeis  getcookieByKey

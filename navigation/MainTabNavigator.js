@@ -9,7 +9,7 @@ import RegistrationForm from '../Noga/RegistrationForm';
 import LoginScreen from "./../Noga/LoginScreen"
 import LinksScreen from '../screens/LinksScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import consts from "./../src/modules/tools/client/hooks/consts"
+import consts from "./../src/modules/tools/client/hooks/consts.json"
 import hooksFactory from "./../src/modules/tools/client/hooks/HooksFactory"
 console.log("hii from APP")
 let hooksRepository = hooksFactory.getRepository();

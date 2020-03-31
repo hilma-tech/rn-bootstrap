@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Alert, Button, TextInput, Text, View, StyleSheet, TouchableHighlight } from 'react-native';
 import { AsyncStorage } from 'react-native';
-import consts from "../src/modules/tools/client/hooks/consts"
+import consts from "../src/modules/tools/client/hooks/consts.json"
 import hooksFactory from "../src/modules/tools/client/hooks/HooksFactory"
 import Auth from "../src/modules/auth/Auth"
 import ValidateFields from '../src/modules/tools/ValidateFields'
